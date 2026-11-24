@@ -1,280 +1,397 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="max-image-preview:large">
-    <title>✧ Escatologia Filmes ✧</title>
-
-    <script src="https://www.googletagmanager.com/gtag/js?id=G-W0GCDCLW2B" async></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-W0GCDCLW2B');
-    </script>
-    <link rel="icon" href="favicon.webp" sizes="32x32">
-
-
-    <meta property="og:url" content="https://archive.org/details/salo-ou-120-dias-de-sodoma">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADIVINHE O NOME DAS BANDEIRAS</title>
 
     <style>
-        :root {
-
-            --bg: #ffffff;
-            --text: #000000;
-            --font-main: serif, 'Times New Roman', serif;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         }
 
         body {
-            background-image: url('cutecore.jpg');
-            margin: 20px;
-            padding-top: 200px;
-            background-color: var(--bg);
-            background-size: 300px;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: repeat;
-            color: var(--text);
+            background-color: black;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            min-height: 100vh;
         }
 
-        a {
-            text-decoration: wavy;
-            color: rgb(0, 0, 0);
-            transition: 0.5s;
-        }
-
-        .cine-container-main {
-            max-width: 700px;
-            margin: 0 auto;
-            padding: 0px 0px;
-        }
-
-        /* Cabeçalho */
-        .cine-header-bar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 9100px;
-            height: 70px;
-            background-color: rgba(255, 212, 239, 0.322);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--accent);
-            box-shadow: 0 5px 20px var(--accent-glow);
-        }
-
-        .cine-header-flex {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-            max-width: 920px;
-            margin: 50 auto;
-            padding: 0 200px;
-        }
-
-        .cine-header-logo {
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-
-        .cine-header-logo img {
-            align-items: center;
-            height: 50px;
-            width: auto;
-            border-radius: 1px;
-
-        }
-
-        .cine-header-logo img:hover {
-            transform: scale(1.0);
-        }
-
-        .cine-menu-ul {
-            display: flex;
-            gap: 10px;
-            list-style: none;
-            margin: 10;
-            padding: 10;
-        }
-
-        .cine-menu-ul li a {
+        #inicio {
             display: block;
-            color: var(--accent);
-            font-size: 0.80rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            padding: 8px 15px;
-            text-transform: uppercase;
-            border-radius: 1px;
         }
 
-        .cine-menu-ul li a:hover {
-            color: #ffffff;
-            background: var(--accent);
+        #quiz,
+        #resultado {
+            display: none;
         }
 
-        .cine-feed-card-h {
-            display: inline-flex;
-            background: #ffffff;
-            /* Fundo branco fixado no quadrado do filme */
-            border: 1px solid var(--accent-soft);
-            border-radius: 5px;
-            overflow: hidden;
-            min-height: min-content;
-            transition: all 0.4s ease;
-            box-shadow: 0 30px 20px rgba(255, 225, 245, 0.514);
+        .title {
+            color: white;
+            font-size: 40px;
+            margin: 20px;
         }
 
-        .cine-feed-card-h:hover {
-            .cine-feed-card-h:hover {
-                border-color: var(--accent);
-                transform: translateY(-4px);
-                box-shadow: 0 15px 30px var(--accent-glow);
+        p {
+            font-size: 20px;
+            margin: 15px;
+        }
+
+        #currentTime {
+            font-size: 18px;
+        }
+
+        .imagemInicio {
+            width: 250px;
+            max-width: 90%;
+            height: 160px;
+            object-fit: contain;
+            margin: 25px;
+        }
+
+        .botao {
+            font-size: 22px;
+            margin: 20px;
+        }
+
+        button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 15px 25px;
+            margin: 10px;
+            border-radius: 10px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background-color: lightgray;
+        }
+
+        button:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+
+        #bandeira {
+            width: 350px;
+            height: 230px;
+            object-fit: contain;
+            background-color: white;
+            border: 4px solid white;
+            border-radius: 10px;
+            margin: 25px;
+        }
+
+        #contador {
+            font-size: 22px;
+        }
+
+        #alternativas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            max-width: 650px;
+            margin: 20px auto;
+        }
+
+        .alternativa {
+            width: 270px;
+            background-color: white;
+            color: black;
+        }
+
+        #mensagem {
+            min-height: 35px;
+            font-size: 23px;
+        }
+
+        #pontuacao {
+            font-size: 21px;
+        }
+
+        #resultadoFinal {
+            font-size: 30px;
+            margin: 30px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 15px;
             }
 
-            .card-h-media {
-                align-items: center;
-                width: fit-content;
-                max-width: max-content;
-                flex-shrink: 9;
-                background: var(--accent-soft);
-                overflow: visible;
+            .title {
+                font-size: 30px;
             }
 
-            .card-h-media a {
-                width: 20%;
-                max-width: max-content;
-                flex-shrink: 0;
-                background: #f8f9fa;
-                overflow: visible;
+            #bandeira {
+                width: 90%;
+                max-width: 350px;
+                height: 210px;
             }
 
-            .card-h-media img {
-                width: 100%;
-                height: 100%;
-                min-height: 200px;
-                object-fit:fill;
-                display:flex;
-                margin: 0 auto;
-                /* Centralização horizontal adicional */
-                transition: transform 1s ease;
+            .alternativa {
+                width: 90%;
             }
-
-            .cine-feed-card-h:hover .card-h-media img {
-                transform: scale(1);
-            }
-
-            .card-h-info {
-                padding: 0px 0px;
-            }
-
-            .card-h-title {
-                margin: 0 0 0px;
-                font-size: 1.7rem;
-                line-height: 30px;
-            }
-
-            .card-h-title a {
-                color: var(--accent);
-            }
-
-            .cine-feed-card-h:hover .card-h-title a {
-                text-shadow: 0 0 10px var(--accent-glow);
-            }
-
-            .card-h-excerpt {
-                color: var(--text);
-                font-size: 1rem;
-                line-height: 1.6;
-            }
-
-            .card-h-excerpt p {
-                margin: 0 0 12px;
-            }
-
-            .card-h-excerpt ul {
-                margin: 0 0 10px;
-                padding-left: 20px;
-            }
-
-            .card-h-excerpt strong {
-                color: var(--accent);
-            }
-
-            @media (max-width: 640px) {
-                .cine-feed-card-h {
-                    flex-direction: column;
-                }
-
-                .card-h-media {
-                    width: auto;
-                    max-width: max-content;
-                    height: 1px;
-                }
-
-                .card-h-info {
-                    padding: 1px;
-                }
-            }
+        }
     </style>
 </head>
 
 <body>
 
-    <header class="cine-header-bar">
-        <div class="cine-header-flex">
-            <a href="" class="cine-header-logo">
-                <img src="imagens/bun.webp" alt="escatologia filmes ☆">
-            </a>
-            <ul class="cine-menu-ul">
-                <li><a href="#">Início</a></li>
-                <li><a href="#">Filmes</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
-        </div>
-    </header>
+    <div id="inicio">
 
-    <main class="cine-container-main">
-        <div class="cine-feed-card-h">
-            <div class="card-h-media">
-                <a href="https://archive.org/details/salo-ou-120-dias-de-sodoma">
-                    <img src="../pic.jpg" alt="Poster de Salò">
-                </a>
-            </div>
-            <div class="card-h-info">
-                <h2 class="card-h-title">
-                    <a href="https://archive.org/details/salo-ou-120-dias-de-sodoma">Salò ou os 120 Dias de Sodoma</a>
-                </h2>
-                <div class="card-h-excerpt">
-                    <p>Ambientado em 1944, durante a ocupação nazista na Itália, o filme se passa na curta República
-                        Social Italiana, também conhecida como República de Salò. A trama acompanha quatro figuras de
-                        poder da elite fascista: o Duque, o Bispo, o Magistrado e o Presidente.</p>
+        <h1 class="title">Bandeiras do Mundo</h1>
 
-                    <p>Representando os quatro pilares da autoridade (Nobreza, Igreja, Judiciário e Executivo), esses
-                        homens sequestram nove rapazes e nove moças adolescentes. Os jovens são levados para uma mansão
-                        isolada e luxuosa, onde ficam sob o domínio absoluto dos libertinos, protegidos por guardas
-                        armados.</p>
+        <p>Adivinhe as bandeiras dos países do mundo.</p>
 
-                    <p>A narrativa é estruturada de forma inspirada na obra de Dante Alighieri, dividindo-se em quatro
-                        segmentos:</p>
+        <p id="currentTime"></p>
 
-                    <ul>
-                        <li><strong>Anteinferno:</strong> onde as regras são estabelecidas.</li>
-                        <li><strong>Círculo das Paixões:</strong> focado em perversões verbais e visuais.</li>
-                        <li><strong>Círculo da Merda:</strong> focado na degradação física e escatologia.</li>
-                        <li><strong>Círculo do Sangue:</strong> o clímax da violência e tortura.</li>
-                    </ul>
+        <img src="bandeiras/flag.gif" class="imagemInicio" alt="Bandeira do Brasil">
 
-                    <p>Dentro da mansão, os quatro senhores utilizam quatro narradoras idosas para contar histórias de
-                        depravação. Essas histórias servem como gatilhos para que os líderes submetam os jovens a
-                        rituais de humilhação, desumanização e tortura física e psicológica.</p>
-                </div>
-            </div>
-        </div>
-    </main>
+        <h3 class="botao">Aperte o botão para começar o quiz:</h3>
+
+        <button id="comecar">COMEÇAR QUIZ</button>
+        <button id="voltar">VOLTAR</button>
+
+    </div>
+
+    <div id="quiz">
+
+        <h1 class="title">Adivinhe a Bandeira</h1>
+
+        <p id="contador"></p>
+
+        <img id="bandeira" src="" alt="Bandeira do país misterioso">
+
+        <h2>Qual é o país dessa bandeira?</h2>
+
+        <div id="alternativas"></div>
+
+        <p id="mensagem"></p>
+
+        <p id="pontuacao">Pontuação: 0</p>
+
+    </div>
+
+    <div id="resultado">
+
+        <h1 class="title">Fim do Quiz!</h1>
+
+        <h2 id="resultadoFinal"></h2>
+
+        <button id="reiniciar">JOGAR NOVAMENTE</button>
+        <button id="voltarInicio">VOLTAR AO INÍCIO</button>
+
+    </div>
+
+    <script>
+        const perguntas = [
+            {
+                bandeira: "bandeiras/tl.png",
+                resposta: "Timor-Leste",
+                alternativas: ["Zimbábue", "Timor-Leste", "Chile", "Bangladesh"]
+            },
+            {
+                bandeira: "bandeiras/bf.png",
+                resposta: "Burkina Faso",
+                alternativas: ["Suriname", "Gana", "Burkina Faso", "Uganda"]
+            },
+            {
+                bandeira: "bandeiras/lk.png",
+                resposta: "Sri Lanka",
+                alternativas: ["Comores", "Malawi", "Índia", "Sri Lanka"]
+            },
+            {
+                bandeira: "bandeiras/bw.png",
+                resposta: "Botsuana",
+                alternativas: ["Estônia", "Botsuana", "Kiribati", "Letônia"]
+            },
+            {
+                bandeira: "bandeiras/pw.png",
+                resposta: "Palau",
+                alternativas: ["Palau", "Nigéria", "San Marino", "Honduras"]
+            },
+            {
+                bandeira: "bandeiras/ls.png",
+                resposta: "Lesoto",
+                alternativas: ["Serra Leoa", "Gabão", "Lesoto", "Cazaquistão"]
+            },
+            {
+                bandeira: "bandeiras/sa.png",
+                resposta: "Arábia Saudita",
+                alternativas: ["Irã", "Turcomenistão", "Arábia Saudita", "Paquistão"]
+            },
+            {
+                bandeira: "bandeiras/vn.png",
+                resposta: "Vietnã",
+                alternativas: ["Coreia do Norte", "Nova Zelândia", "Singapura", "Vietnã"]
+            },
+            {
+                bandeira: "bandeiras/bb.png",
+                resposta: "Barbados",
+                alternativas: ["Barbados", "Nicarágua", "Chipre", "Bahamas"]
+            },
+            {
+                bandeira: "bandeiras/az.png",
+                resposta: "Azerbaijão",
+                alternativas: ["Burundi", "Azerbaijão", "Andorra", "Somália"]
+            }
+        ];
+
+        let perguntaAtual = 0;
+        let pontos = 0;
+        let respondida = false;
+
+        const inicio = document.getElementById("inicio");
+        const quiz = document.getElementById("quiz");
+        const resultado = document.getElementById("resultado");
+
+        const comecar = document.getElementById("comecar");
+        const voltar = document.getElementById("voltar");
+        const reiniciar = document.getElementById("reiniciar");
+        const voltarInicio = document.getElementById("voltarInicio");
+
+        const bandeira = document.getElementById("bandeira");
+        const alternativas = document.getElementById("alternativas");
+        const mensagem = document.getElementById("mensagem");
+        const pontuacao = document.getElementById("pontuacao");
+        const contador = document.getElementById("contador");
+        const resultadoFinal = document.getElementById("resultadoFinal");
+
+        function iniciarQuiz() {
+            perguntaAtual = 0;
+            pontos = 0;
+            respondida = false;
+
+            inicio.style.display = "none";
+            resultado.style.display = "none";
+            quiz.style.display = "block";
+
+            mostrarPergunta();
+        }
+
+        function mostrarPergunta() {
+            const pergunta = perguntas[perguntaAtual];
+
+            respondida = false;
+
+            mensagem.textContent = "";
+            alternativas.innerHTML = "";
+
+            bandeira.onerror = function() {
+                mensagem.textContent = "Erro ao carregar a imagem: ";
+            };
+
+            bandeira.src = pergunta.bandeira;
+
+            contador.textContent =
+                "Pergunta " + (perguntaAtual + 1) +
+                " de " + perguntas.length;
+
+            pontuacao.textContent = "Pontuação: " + pontos;
+
+            pergunta.alternativas.forEach(function(opcao) {
+                const botao = document.createElement("button");
+
+                botao.textContent = opcao;
+                botao.classList.add("alternativa");
+
+                botao.onclick = function() {
+                    verificarResposta(opcao);
+                };
+
+                alternativas.appendChild(botao);
+            });
+        }
+
+        function verificarResposta(resposta) {
+            if (respondida) {
+                return;
+            }
+
+            respondida = true;
+
+            const respostaCorreta = perguntas[perguntaAtual].resposta;
+
+            if (resposta === respostaCorreta) {
+                pontos++;
+                mensagem.textContent = "CORRETO!";
+            } else {
+                mensagem.textContent = "ERRADO! A resposta era " + respostaCorreta + ".";
+            }
+
+            pontuacao.textContent = "Pontuação: " + pontos;
+
+            bloquearAlternativas();
+
+            setTimeout(function() {
+                perguntaAtual++;
+
+                if (perguntaAtual < perguntas.length) {
+                    mostrarPergunta();
+                } else {
+                    finalizarQuiz();
+                }
+            }, 1500);
+        }
+
+        function bloquearAlternativas() {
+            const botoes = document.querySelectorAll(".alternativa");
+
+            botoes.forEach(function(botao) {
+                botao.disabled = true;
+            });
+        }
+
+        function finalizarQuiz() {
+            quiz.style.display = "none";
+            resultado.style.display = "block";
+
+            resultadoFinal.textContent =
+                "Você acertou " + pontos +
+                " de " + perguntas.length +
+                " perguntas!";
+        }
+
+        function voltarParaInicio() {
+            quiz.style.display = "none";
+            resultado.style.display = "none";
+            inicio.style.display = "block";
+        }
+
+        comecar.onclick = iniciarQuiz;
+        reiniciar.onclick = iniciarQuiz;
+        voltarInicio.onclick = voltarParaInicio;
+
+        voltar.onclick = function() {
+            window.history.back();
+        };
+
+        function atualizarHora() {
+            const agora = new Date();
+
+            const horas = String(agora.getHours()).padStart(2, "0");
+            const minutos = String(agora.getMinutes()).padStart(2, "0");
+            const segundos = String(agora.getSeconds()).padStart(2, "0");
+
+            document.getElementById("currentTime").textContent =
+                horas + ":" + minutos + ":" + segundos;
+        }
+
+        setInterval(atualizarHora, 1000);
+        atualizarHora();
+    </script>
 
 </body>
 
