@@ -50,8 +50,6 @@
         .imagemInicio {
             width: 250px;
             max-width: 90%;
-            height: 160px;
-            object-fit: contain;
             margin: 25px;
         }
 
@@ -77,17 +75,10 @@
             background-color: lightgray;
         }
 
-        button:disabled {
-            cursor: not-allowed;
-            opacity: 0.6;
-            transform: none;
-        }
-
         #bandeira {
             width: 350px;
             height: 230px;
-            object-fit: contain;
-            background-color: white;
+            object-fit: cover;
             border: 4px solid white;
             border-radius: 10px;
             margin: 25px;
@@ -124,26 +115,6 @@
             font-size: 30px;
             margin: 30px;
         }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 15px;
-            }
-
-            .title {
-                font-size: 30px;
-            }
-
-            #bandeira {
-                width: 90%;
-                max-width: 350px;
-                height: 210px;
-            }
-
-            .alternativa {
-                width: 90%;
-            }
-        }
     </style>
 </head>
 
@@ -157,7 +128,7 @@
 
         <p id="currentTime"></p>
 
-        <img src="bandeiras/flag.gif" class="imagemInicio" alt="Bandeira do Brasil">
+        <img src="bandeiras/flag.gif" class="imagemInicio" alt="Bandeiras">
 
         <h3 class="botao">Aperte o botão para começar o quiz:</h3>
 
@@ -172,7 +143,7 @@
 
         <p id="contador"></p>
 
-        <img id="bandeira" src="" alt="Bandeira do país misterioso">
+        <img id="bandeira" src="" alt="Bandeira">
 
         <h2>Qual é o país dessa bandeira?</h2>
 
@@ -191,7 +162,6 @@
         <h2 id="resultadoFinal"></h2>
 
         <button id="reiniciar">JOGAR NOVAMENTE</button>
-        <button id="voltarInicio">VOLTAR AO INÍCIO</button>
 
     </div>
 
@@ -199,8 +169,8 @@
         const perguntas = [
             {
                 bandeira: "bandeiras/tl.png",
-                resposta: "Timor-Leste",
-                alternativas: ["Zimbábue", "Timor-Leste", "Chile", "Bangladesh"]
+                resposta: "Timor Leste",
+                alternativas: ["Zimbabwe", "Timor Leste", "Chile", "Bangladesh"]
             },
             {
                 bandeira: "bandeiras/bf.png",
@@ -251,7 +221,6 @@
 
         let perguntaAtual = 0;
         let pontos = 0;
-        let respondida = false;
 
         const inicio = document.getElementById("inicio");
         const quiz = document.getElementById("quiz");
@@ -260,7 +229,6 @@
         const comecar = document.getElementById("comecar");
         const voltar = document.getElementById("voltar");
         const reiniciar = document.getElementById("reiniciar");
-        const voltarInicio = document.getElementById("voltarInicio");
 
         const bandeira = document.getElementById("bandeira");
         const alternativas = document.getElementById("alternativas");
@@ -272,7 +240,6 @@
         function iniciarQuiz() {
             perguntaAtual = 0;
             pontos = 0;
-            respondida = false;
 
             inicio.style.display = "none";
             resultado.style.display = "none";
@@ -284,22 +251,18 @@
         function mostrarPergunta() {
             const pergunta = perguntas[perguntaAtual];
 
-            respondida = false;
-
-            mensagem.textContent = "";
-            alternativas.innerHTML = "";
-
-            bandeira.onerror = function() {
-                mensagem.textContent = "Erro ao carregar a imagem: ";
-            };
-
             bandeira.src = pergunta.bandeira;
 
             contador.textContent =
                 "Pergunta " + (perguntaAtual + 1) +
                 " de " + perguntas.length;
 
-            pontuacao.textContent = "Pontuação: " + pontos;
+            pontuacao.textContent =
+                "Pontuação: " + pontos;
+
+            mensagem.textContent = "";
+
+            alternativas.innerHTML = "";
 
             pergunta.alternativas.forEach(function(opcao) {
                 const botao = document.createElement("button");
@@ -316,22 +279,20 @@
         }
 
         function verificarResposta(resposta) {
-            if (respondida) {
-                return;
-            }
-
-            respondida = true;
-
-            const respostaCorreta = perguntas[perguntaAtual].resposta;
+            const respostaCorreta =
+                perguntas[perguntaAtual].resposta;
 
             if (resposta === respostaCorreta) {
                 pontos++;
                 mensagem.textContent = "CORRETO!";
             } else {
-                mensagem.textContent = "ERRADO! A resposta era " + respostaCorreta + ".";
+                mensagem.textContent =
+                    "ERRADO! A resposta era " +
+                    respostaCorreta + ".";
             }
 
-            pontuacao.textContent = "Pontuação: " + pontos;
+            pontuacao.textContent =
+                "Pontuação: " + pontos;
 
             bloquearAlternativas();
 
@@ -343,11 +304,12 @@
                 } else {
                     finalizarQuiz();
                 }
-            }, 1500);
+            }, 1000);
         }
 
         function bloquearAlternativas() {
-            const botoes = document.querySelectorAll(".alternativa");
+            const botoes =
+                document.querySelectorAll(".alternativa");
 
             botoes.forEach(function(botao) {
                 botao.disabled = true;
@@ -364,35 +326,40 @@
                 " perguntas!";
         }
 
-        function voltarParaInicio() {
+        comecar.onclick = function() {
+            iniciarQuiz();
+        };
+
+        reiniciar.onclick = function() {
+            iniciarQuiz();
+        };
+
+        voltar.onclick = function() {
             quiz.style.display = "none";
             resultado.style.display = "none";
             inicio.style.display = "block";
-        }
-
-        comecar.onclick = iniciarQuiz;
-        reiniciar.onclick = iniciarQuiz;
-        voltarInicio.onclick = voltarParaInicio;
-
-        voltar.onclick = function() {
-            window.history.back();
         };
 
         function atualizarHora() {
             const agora = new Date();
 
-            const horas = String(agora.getHours()).padStart(2, "0");
-            const minutos = String(agora.getMinutes()).padStart(2, "0");
-            const segundos = String(agora.getSeconds()).padStart(2, "0");
+            const horas =
+                String(agora.getHours()).padStart(2, "0");
+
+            const minutos =
+                String(agora.getMinutes()).padStart(2, "0");
+
+            const segundos =
+                String(agora.getSeconds()).padStart(2, "0");
 
             document.getElementById("currentTime").textContent =
                 horas + ":" + minutos + ":" + segundos;
         }
 
         setInterval(atualizarHora, 1000);
+
         atualizarHora();
     </script>
 
 </body>
-
 </html>
